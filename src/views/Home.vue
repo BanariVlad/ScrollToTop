@@ -24,8 +24,8 @@
 
     mounted() {
       window.scroll = () => {
-        let currentScroll = document.documentElement.scrollTop
-        if (currentScroll > 0) {
+        let scroll = document.documentElement.scrollTop
+        if (scroll > 0) {
           window.scrollTo({
             top: 0,
             behavior: "smooth"
