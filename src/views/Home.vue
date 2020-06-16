@@ -1,10 +1,11 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png"/>
-    <div class="back-to-top" v-show="visible" @click="backToTop">Back</div>
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <div class="back-to-top" v-back="96" v-show="visible" @click="backToTop">Back</div>
     <p v-for="text in 25" :key="text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus eleifend ante, et vehicula ante
-      posuere id. Integer fermentum ultrices dui vitae accumsan. Quisque metus eros, accumsan quis nisl vel,
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus
+      eleifend ante, et vehicula anteposuere id. Integer fermentum ultrices dui
+      vitae accumsan. Quisque metus eros, accumsan quis nisl vel,
       molestie imperdiet lorem. Vivamus pulvinar id leo a suscipit. Vivamus rhoncus dui ac arcu placerat, aliquam
       auctor nisl rhoncus. Cras bibendum molestie consectetur. Praesent pulvinar, eros ut maximus vulputate, nunc
       magna bibendum mi, ac aliquam sem velit ac dui. Sed lorem odio, lobortis id molestie pretium, pretium et
@@ -14,48 +15,47 @@
 </template>
 
 <script>
-  // @ is an alias to /src
+// @ is an alias to /src
 
-  export default {
-    name: "Home",
-    data: () => ({
-      visible: false
-    }),
+export default {
+  name: "Home",
+  data: () => ({
+    visible: false,
+    scrollBack: ""
+  }),
 
-    mounted() {
-      window.scroll = () => {
-        let scroll = document.documentElement.scrollTop
-        if (scroll > 0) {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          })
-        }
+  mounted() {
+    this.scrollBack = () => {
+      let scroll = document.documentElement.scrollTop;
+      if (scroll > 0) {
+        scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
       }
+    };
 
-      window.addEventListener('scroll', this.followScroll)
+    document.addEventListener("scroll", this.followScroll);
+  },
+
+  methods: {
+    followScroll() {
+      this.visible = window.pageYOffset > 250;
     },
 
-    methods: {
-      followScroll() {
-        this.visible = (window.pageYOffset > 250)
-      },
-
-      backToTop() {
-        window.scroll()
-      }
+    backToTop() {
+      this.scrollBack();
     }
-  };
+  }
+};
 </script>
 
 <style scoped>
-  .back-to-top {
-    position: fixed;
-    cursor: pointer;
-    left: 90%;
-    top: 96%;
-    background: #000;
-    color: #fff;
-    height: 100px;
-  }
+.back-to-top {
+  position: fixed;
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+  height: 100px;
+}
 </style>
